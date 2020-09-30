@@ -6,6 +6,8 @@ let list = document.getElementById("list");
 
 let newItem = document.getElementById("newItem")
 
+let items = document.getElementById("items")
+
 form.addEventListener("submit", (e) => {
     e.preventDefault()
 
@@ -36,11 +38,10 @@ field.focus();
 }
 
 function createItem(x) {
-    let listItem = `<li>${x}</li>`
-    items.insertAdjacentHTML("beforeend", listItem);
-    newItem.value = "";
-    newItem.focus();
+    let listItem = document.createElement('li')
+
+    listItem.textContent = x 
+
+    items.appendChild(listItem)
+
 }
-    
-
-
