@@ -13,6 +13,15 @@ form.addEventListener("submit", (e) => {
     
 })
 
+newItem.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    createItem(newItem.value)
+
+
+})
+
+
 function createList(x) {
     let label = `<div class="text-left col-xs-3"><h3>${x}</h3><br>
     <input id="newItem" type="text" autocomplete="off">
@@ -27,14 +36,11 @@ field.focus();
 }
 
 function createItem(x) {
-    let newToDo = `<li class="text-light">${x} 
-    <button onclick="editItem(this)" class="btn btn-warning border border-dark">Edit</button>
-    <button onclick="deleteItem(this)" class="btn btn-danger border border-dark">Delete</button>
-    </li>`
-    items.insertAdjacentHTML("beforeend", newToDo);
-    field.value = "";
-    field.focus();
-    }
+    let listItem = `<li>${x}</li>`
+    items.insertAdjacentHTML("beforeend", listItem);
+    newItem.value = "";
+    newItem.focus();
+}
     
 
 
