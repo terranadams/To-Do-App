@@ -4,9 +4,7 @@ let field = document.getElementById("field");
 
 let lists = document.getElementById("lists");
 
-let newItem = document.getElementById("newItem")
 
-let items = document.getElementById("items")
 
 form.addEventListener("submit", (e) => {
 
@@ -21,7 +19,7 @@ function createList(x) {
     let label = `<div class="text-left col-xs-3"><h3>${x}</h3><br>
     <input id="newItem" type="text" autocomplete="off">
 
-    <button onclick="createItem(newItem.value)" class="btn btn-success border border-dark">Add Item</button>
+    <button onclick="createItem(document.getElementById('newItem').value)" id="addItemButton" class="btn btn-success border border-dark">Add Item</button>
 
     <button onclick="editList(this)" class="btn btn-warning border border-dark">Edit</button>
 
@@ -34,7 +32,18 @@ function createList(x) {
 
 lists.insertAdjacentHTML("beforeend", label);
 field.value = "";
+
 field.focus();
+
+let addItemButton = document.getElementById("addItemButton");
+
+}
+
+
+function createItem(x) {
+    let items = document.getElementById("items")
+    let newListItemHTML = `<li>${x}</li>`
+    items.insertAdjacentHTML("beforeend", newListItemHTML)
 }
 
 function editList(thisElement) {
@@ -45,8 +54,5 @@ function deleteList(thisElement) {
     thisElement.parentElement.remove()
 }
 
-function createItem(x) {
-    let newListItemHTML = `<li>${x}</li>`
-    items.insertAdjacentHTML("beforeend", newListItemHTML)
-}
+
 
