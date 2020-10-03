@@ -19,24 +19,17 @@ function createList(x) {
     let label = `<div class="text-left col-xs-3"><h3>${x}</h3><br>
     <input id="newItem" type="text" autocomplete="off">
 
-    <button onclick="createItem(document.getElementById('newItem').value)" id="addItemButton" class="btn btn-success border border-dark">Add Item</button>
-
+    <button onclick="createItem(document.getElementById('newItem').value)" class="btn btn-success border border-dark">Add Item</button>
     <button onclick="editList(this)" class="btn btn-warning border border-dark">Edit</button>
-
     <button onclick="deleteList(this)" class="btn btn-danger border border-dark">Delete</button>
 
     <ul id="items">
     </ul>
-
     </div>`
 
 lists.insertAdjacentHTML("beforeend", label);
 field.value = "";
-
 field.focus();
-
-let addItemButton = document.getElementById("addItemButton");
-
 }
 
 
@@ -53,6 +46,3 @@ function editList(thisElement) {
 function deleteList(thisElement) {
     thisElement.parentElement.remove()
 }
-
-
-
