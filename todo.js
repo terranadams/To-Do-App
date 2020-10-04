@@ -18,7 +18,7 @@ form.addEventListener("submit", (e) => {
 function createList(x) {
     let label = `<div class="text-left col-xs-3"><h3>${x}</h3><br>
 
-    <input id="newItem" type="text" autocomplete="off">
+    <input id="${x}" type="text" autocomplete="off">
 
     <button onclick="createItem(document.getElementById('newItem').value)" class="btn btn-success border border-dark">Add Item</button>
     <button onclick="editList(this)" class="btn btn-warning border border-dark">Edit</button>
