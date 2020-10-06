@@ -18,7 +18,7 @@ form.addEventListener("submit", (e) => {
 // This function, called with the form submission, injects the "label" HTML below into the "lists" div box.
 function createList(listName) {
     let label =
-        `<div id="${listName}" class="text-left col-xs-3">
+        `<div id="${listName}" class="text-left col-xs-3 listBoxes">
         <h3>${listName}</h3><br>
 
         <input id="newItem" type="text" autocomplete="off">
@@ -31,8 +31,10 @@ function createList(listName) {
 
         </ul>
     </div>`
+
     listDictionary[listName] = []; // Adds new element to dictionary with key as listName
     lists.insertAdjacentHTML("beforeend", label); // This adds the new list to the overall "lists" div box.
+
     field.value = ""; // This just empties the text field after submission.
     field.focus(); // This refocuses the curser into the text field after submission. 
 }
@@ -44,7 +46,6 @@ function createItem(itemName, listName) {
     let listHtml = printList(listName); // This creates the list to match the new data
     list.innerHTML = listHtml; // This sets the list html to the newly created html
 
-    items.inn = listHtml; // This adds the above code into the <ul> tag.
     let newItem = document.getElementById(listName).getElementsByTagName('input')[0] // Gets input of individual list
     newItem.value = ""; // Empties input field
     newItem.focus(); // Sets focus to this input field
@@ -54,15 +55,20 @@ function createItem(itemName, listName) {
 function printList(listName) {
     let toDoHtml = '';
     for (let i = 0; i < listDictionary[listName].length; i++) {
-        toDoHtml += `<li>${listDictionary[listName][i]}</li>`; // Create new list item for every item in the dictionary data
+        toDoHtml += `<li>${listDictionary[listName][i]}<input type="checkbox" id="completed"></li>`; // Create new list item for every item in the dictionary data
     }
     return toDoHtml; // returns full list html
 }
 
-function editList(thisElement) {
 
+function editList(listName) {
+    
 }
 
 function deleteList(thisElement) {
     thisElement.parentElement.remove()
+}
+
+function deleteCompleted() {
+
 }
