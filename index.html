@@ -16,6 +16,12 @@
         .listBoxes {
           margin-right: 10px;
         }
+        #topButtons {
+          justify-content: center;
+        }
+        .topButton {
+          margin-left: 5px;
+        }
     </style>
 
     <title>To Do App</title>
@@ -25,10 +31,13 @@
     <div class="text-center text-white bg-info">
       <h1>To-Do App</h1>
 
+      <div class="row" id="topButtons">
       <form id="form">
           <input id="field" type="text" autocomplete="off">
-          <button class="btn btn-primary">Create New List</button>
+          <button class="btn btn-primary border border-dark topButton">Create New List</button>
       </form>
+      <button onclick="clearTasks()" class="btn btn-danger border border-dark topButton">Clear Completed Tasks</button>
+      </div>
     </div>
 
     <br>
