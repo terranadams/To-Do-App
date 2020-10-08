@@ -1,0 +1,17 @@
+#lists {
+    margin-left: 20px;
+  }
+  .listBoxes {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(103, 255, 255);
+  }
+  #topButtons {
+    justify-content: center;
+  }
+  .topButton {
+    margin-left: 5px;
+  }
+  body {
+      background-color: rgb(123, 231, 217);
+  }

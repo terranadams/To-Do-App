@@ -18,8 +18,8 @@ form.addEventListener("submit", (e) => {
 // This function, called with the form submission, injects the "label" HTML below into the "lists" div box.
 function createList(listName) {
     let label =
-        `<div id="${listName}" class="text-left col-xs-3 listBoxes">
-        <h3>${listName}</h3><br>
+        `<div id="${listName}" class="text-left col-xs-3 listBoxes border border-dark rounded">
+        <h3 class="text-center">${listName}</h3><br>
 
         <input id="newItem" type="text" autocomplete="off">
 
