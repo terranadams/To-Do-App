@@ -24,7 +24,7 @@ function createList(listName) {
         <input id="newItem" type="text" autocomplete="off">
 
         <button onclick="createItem(document.getElementById('${listName}').getElementsByTagName('input')[0].value, '${listName}')" class="btn btn-success border border-dark">Add Item</button>
-        <button onclick="editList(${listName})" class="btn btn-warning border border-dark">Edit</button>
+        <button onclick="editList('${listName}')" class="btn btn-warning border border-dark">Edit</button>
         <button onclick="deleteList(this)" class="btn btn-danger border border-dark">Delete</button>
 
         <ul id="items">
@@ -65,12 +65,18 @@ function printList(listName) {
 // Get this to edit the listname
 function editList(listName) {
     let newValue = prompt("What is the new list name for this list?")
-    listDictionary[listName] = newValue
-    document.getElementById('listName').getElementsByTagName('h3')[0].innerHTML = newValue;
+    listDictionary[newValue] = Object.assign(listDictionary[listName]); //Creates new key in dictionary to hold old list's data
+    delete listDictionary[listName]; //deletes old list
+    deleteListByName(listName); //deletes old list's html
+    createList(newValue); //adds new html to hold list
+    resetList(newValue); //populates new list with items
 }
 
 function deleteList(thisElement) {
     thisElement.parentElement.remove()
+}
+function deleteListByName(listName) {
+    document.getElementById(listName).remove();
 }
 
 // Get this to clear the completed tasks
