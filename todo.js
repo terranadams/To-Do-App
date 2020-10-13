@@ -32,7 +32,7 @@ function createList(listName) {
         </ul>
     </div>`
 
-    listDictionary[listName] = []; // Adds new element to dictionary with key as listName
+    listDictionary[listName] = {}; // Adds new element to dictionary with key as listName
     lists.insertAdjacentHTML("beforeend", label); // This adds the new list to the overall "lists" div box.
 
     field.value = ""; // This just empties the text field after submission.
@@ -41,7 +41,7 @@ function createList(listName) {
 
 // This function runs when the green button is clicked with content in the "newItem" text box.
 function createItem(itemName, listName) {
-    listDictionary[listName].push(itemName); // Adds new item to data dictionary inside key
+    listDictionary[listName][itemName] = false; // Adds new item to data dictionary inside key and set it to false
     let list = document.getElementById(listName).getElementsByTagName('ul')[0]; // This selects the unordered lists tag.
     let listHtml = printList(listName); // This creates the list to match the new data
     list.innerHTML = listHtml; // This sets the list html to the newly created html
@@ -54,13 +54,15 @@ function createItem(itemName, listName) {
 // This function creates the html for each list based on the data stored in the dictionary associated with the list
 function printList(listName) {
     let toDoHtml = '';
-    for (let i = 0; i < listDictionary[listName].length; i++) {
-        toDoHtml += `<li>${listDictionary[listName][i]}<input type="checkbox" id="completed"></li>`; // Create new list item for every item in the dictionary data
+    for (let key of Object.keys(listDictionary[listName])) { //Loop through all items in current list's object
+        toDoHtml += `<li>${key}<input type="checkbox" class="completed" onchange="assignCheckboxValueToDictionary('${listName}', '${key}', this)"` 
+        
+        toDoHtml += `></li>`;
     }
     return toDoHtml; // returns full list html
 }
 
-
+// Get this to edit the listname
 function editList(listName) {
     let newValue = prompt("What is the new list name for this list?")
     listDictionary[listName] = newValue
@@ -71,6 +73,26 @@ function deleteList(thisElement) {
     thisElement.parentElement.remove()
 }
 
+// Get this to clear the completed tasks
 function clearCompleted() {
+    for (let key of Object.keys(listDictionary)) {
+        let currentList = document.getElementById(key).getElementsByTagName('ul')[0];
+        for (let i = 0; i < completedItems.length; i++) {
+            if(completedItems[i].checked) {
+                console.log(completedItems[i]);
+            }
+        }
+    }
+    
+    let completedItems = document.getElementsByClassName('completed');
+    
+    if (checked) {
+        thisElement.parentElement.remove()
+    }
+}
 
+function assignCheckboxValueToDictionary(listName, itemName, element) {
+    console.log(listDictionary[listName]);
+    listDictionary[listName][itemName] = element.checked;
+    console.log(listDictionary[listName]);
 }
