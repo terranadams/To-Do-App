@@ -56,7 +56,9 @@ function printList(listName) {
     let toDoHtml = '';
     for (let key of Object.keys(listDictionary[listName])) { //Loop through all items in current list's object
         toDoHtml += `<li>${key}<input type="checkbox" class="completed" onchange="assignCheckboxValueToDictionary('${listName}', '${key}', this)"` 
-        
+        if(listDictionary[listName][key] === true) {
+            toDoHtml += `checked=${listDictionary[listName][key]}`
+        }
         toDoHtml += `></li>`;
     }
     return toDoHtml; // returns full list html
@@ -92,7 +94,6 @@ function clearCompleted() {
 }
 
 function assignCheckboxValueToDictionary(listName, itemName, element) {
-    console.log(listDictionary[listName]);
     listDictionary[listName][itemName] = element.checked;
     console.log(listDictionary[listName]);
 }
