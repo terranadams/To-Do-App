@@ -42,9 +42,7 @@ function createList(listName) {
 // This function runs when the green button is clicked with content in the "newItem" text box.
 function createItem(itemName, listName) {
     listDictionary[listName][itemName] = false; // Adds new item to data dictionary inside key and set it to false
-    let list = document.getElementById(listName).getElementsByTagName('ul')[0]; // This selects the unordered lists tag.
-    let listHtml = printList(listName); // This creates the list to match the new data
-    list.innerHTML = listHtml; // This sets the list html to the newly created html
+    resetList(listName); // resets and rewrites list
 
     let newItem = document.getElementById(listName).getElementsByTagName('input')[0] // Gets input of individual list
     newItem.value = ""; // Empties input field
@@ -57,9 +55,9 @@ function printList(listName) {
     for (let key of Object.keys(listDictionary[listName])) { //Loop through all items in current list's object
         toDoHtml += `<li>${key}<input type="checkbox" class="completed" onchange="assignCheckboxValueToDictionary('${listName}', '${key}', this)"` 
         if(listDictionary[listName][key] === true) {
-            toDoHtml += `checked=${listDictionary[listName][key]}`
+            toDoHtml += `checked=${listDictionary[listName][key]}` //Adds a checked attribute if element is completed (this will preserve the checkbox when new items are added)
         }
-        toDoHtml += `></li>`;
+        toDoHtml += `></li>`; //finish up html
     }
     return toDoHtml; // returns full list html
 }
@@ -77,23 +75,22 @@ function deleteList(thisElement) {
 
 // Get this to clear the completed tasks
 function clearCompleted() {
-    for (let key of Object.keys(listDictionary)) {
-        let currentList = document.getElementById(key).getElementsByTagName('ul')[0];
-        for (let i = 0; i < completedItems.length; i++) {
-            if(completedItems[i].checked) {
-                console.log(completedItems[i]);
+    for (let listName of Object.keys(listDictionary)) { //loop through every list
+        for (let itemName of Object.keys(listDictionary[listName])) { //loop through every list item in list
+            if(listDictionary[listName][itemName] === true) {
+                delete listDictionary[listName][itemName];
             }
         }
+        resetList(listName); //resets and rewrites list
     }
-    
-    let completedItems = document.getElementsByClassName('completed');
-    
-    if (checked) {
-        thisElement.parentElement.remove()
-    }
+}
+
+function resetList(listName) {
+    let list = document.getElementById(listName).getElementsByTagName('ul')[0]; // This selects the unordered lists tag.
+    let listHtml = printList(listName); // This creates the list to match the new data
+    list.innerHTML = listHtml; //overwrites list html
 }
 
 function assignCheckboxValueToDictionary(listName, itemName, element) {
     listDictionary[listName][itemName] = element.checked;
-    console.log(listDictionary[listName]);
 }
