@@ -53,28 +53,33 @@ function createItem(itemName, listName) {
 function printList(listName) {
     let toDoHtml = '';
     for (let key of Object.keys(listDictionary[listName])) { //Loop through all items in current list's object
-        toDoHtml += `<li>${key}<input type="checkbox" class="completed" onchange="assignCheckboxValueToDictionary('${listName}', '${key}', this)"` 
-        if(listDictionary[listName][key] === true) {
+        toDoHtml += `<li>${key}<input type="checkbox" class="completed" onchange="assignCheckboxValueToDictionary('${listName}', '${key}', this)"`
+        if (listDictionary[listName][key] === true) {
             toDoHtml += `checked=${listDictionary[listName][key]}` //Adds a checked attribute if element is completed (this will preserve the checkbox when new items are added)
         }
-        toDoHtml += `></li>`; //finish up html
+        toDoHtml += `><button class="trashButton" onclick="deleteItem('${listName}', '${key}')">Delete</button></li>`; //finish up html
     }
     return toDoHtml; // returns full list html
 }
 
+function deleteItem(listName, itemName) {
+    delete listDictionary[listName][itemName]
+    resetList(listName)
+}
 // Get this to edit the listname
 function editList(listName) {
     let newValue = prompt("What is the new list name for this list?")
+    createList(newValue); //adds new html to hold list
     listDictionary[newValue] = Object.assign(listDictionary[listName]); //Creates new key in dictionary to hold old list's data
     delete listDictionary[listName]; //deletes old list
     deleteListByName(listName); //deletes old list's html
-    createList(newValue); //adds new html to hold list
     resetList(newValue); //populates new list with items
 }
 
 function deleteList(thisElement) {
     thisElement.parentElement.remove()
 }
+
 function deleteListByName(listName) {
     document.getElementById(listName).remove();
 }
@@ -83,7 +88,7 @@ function deleteListByName(listName) {
 function clearCompleted() {
     for (let listName of Object.keys(listDictionary)) { //loop through every list
         for (let itemName of Object.keys(listDictionary[listName])) { //loop through every list item in list
-            if(listDictionary[listName][itemName] === true) {
+            if (listDictionary[listName][itemName] === true) {
                 delete listDictionary[listName][itemName];
             }
         }
