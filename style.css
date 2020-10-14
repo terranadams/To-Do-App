@@ -18,3 +18,6 @@
   .completed {
     margin-left: 12px;
   }
+  .trashButton {
+    font-size: 10px;
+  }

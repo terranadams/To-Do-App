@@ -57,7 +57,7 @@ function printList(listName) {
         if (listDictionary[listName][key] === true) {
             toDoHtml += `checked=${listDictionary[listName][key]}` //Adds a checked attribute if element is completed (this will preserve the checkbox when new items are added)
         }
-        toDoHtml += `><button class="trashButton" onclick="deleteItem('${listName}', '${key}')">Delete</button></li>`; //finish up html
+        toDoHtml += `><button class="trashButton btn" onclick="deleteItem('${listName}', '${key}')">Delete</button></li>`; //finish up html
     }
     return toDoHtml; // returns full list html
 }
