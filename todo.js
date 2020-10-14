@@ -4,7 +4,30 @@ let field = document.getElementById("field"); //This selects the text field.
 
 let lists = document.getElementById("lists"); // This div includes all the lists the form creates.
 
-let listDictionary = {};
+
+/*
+Couple things wrong, first problem being that local storage isn't working, when I uncomment this code, it does nothing.
+Second problem is that in "Application" in developer tools when i look under local storage, it doesn't delete the objects
+that should be getting deleted when I click the delete button on the list items and the lists themselves.
+I don't know how to have whatever is in local storage always replicate whatever is in listDictionary.`
+
+
+let listDictionary = retrieve() || {};
+
+
+function retrieve() { // This function grabs the items in 'bids' (in local strorage) and makes it readable (making it not a string)
+    return JSON.parse(localStorage.getItem("listDictionary"))
+}
+
+function save() { // This runs the local storage by turning the items in the array into a string (it must be a string to be saved in local storage)
+    let listDictionaryString = JSON.stringify(listDictionary)
+    localStorage.setItem("listDictionary", listDictionaryString)
+
+}
+
+*/
+
+
 
 // This event listener creates a div box beneath the header containing "label" HTML.
 form.addEventListener("submit", (e) => {
