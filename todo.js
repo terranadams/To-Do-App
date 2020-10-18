@@ -4,6 +4,7 @@ let field = document.getElementById("field"); //This selects the text field.
 
 let lists = document.getElementById("lists"); // This div includes all the lists the form creates.
 
+let listDictionary = {};
 
 /*
 Couple things wrong, first problem being that local storage isn't working, when I uncomment this code, it does nothing.
